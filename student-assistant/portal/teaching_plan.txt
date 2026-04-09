@@ -1,0 +1,53 @@
+### Week 1: Introduction to Algebra
+
+*   **Curriculum Outcome:** Understanding variables and expressions
+*   **School Curriculum:**
+    *   Define variables and constants.
+    *   Translate word phrases into algebraic expressions.
+    *   Evaluate algebraic expressions by substitution.
+*   **Activities:**
+    *   Interactive session: What is Algebra?
+    *   Practice: Translating phrases to algebraic expressions.
+    *   Group activity: Evaluating expressions with given values.
+*   **Book Recommendation:**
+    *   Title: Algebra 1 for Dummies
+    *   Description: Chapter 1 - Variables and Expressions
+*   **Online Resources:**
+    *   Khan Academy: Introduction to Algebra
+    *   [https://www.khanacademy.org/math/algebra/introduction-to-algebra](https://www.khanacademy.org/math/algebra/introduction-to-algebra)
+
+### Week 2: Simplifying Algebraic Expressions
+
+*   **Curriculum Outcome:** Simplifying expressions by combining like terms
+*   **School Curriculum:**
+    *   Identify like terms in algebraic expressions.
+    *   Combine like terms to simplify expressions.
+    *   Apply the distributive property to simplify expressions.
+*   **Activities:**
+    *   Demonstration: Combining like terms with visual aids.
+    *   Practice: Simplifying expressions using the distributive property.
+    *   Group activity: Simplifying complex algebraic expressions.
+*   **Book Recommendation:**
+    *   Title: Algebra 1 for Dummies
+    *   Description: Chapter 3 - Simplifying Expressions
+*   **Online Resources:**
+    *   IXL: Simplify algebraic expressions
+    *   [https://www.ixl.com/math/grade-7/simplify-algebraic-expressions](https://www.ixl.com/math/grade-7/simplify-algebraic-expressions)
+
+### Week 3: Solving One-Step Equations
+
+*   **Curriculum Outcome:** Solving one-step equations using inverse operations
+*   **School Curriculum:**
+    *   Understand the concept of equality.
+    *   Solve one-step equations using addition, subtraction, multiplication, or division.
+    *   Check solutions to equations.
+*   **Activities:**
+    *   Interactive session: The concept of equality and inverse operations.
+    *   Practice: Solving one-step equations.
+    *   Group activity: Creating and solving one-step equations.
+*   **Book Recommendation:**
+    *   Title: Algebra 1 for Dummies
+    *   Description: Chapter 4 - Solving Equations
+*   **Online Resources:**
+    *   Mathway: Equation Solver
+    *   [https://www.mathway.com/Algebra](https://www.mathway.com/Algebra)

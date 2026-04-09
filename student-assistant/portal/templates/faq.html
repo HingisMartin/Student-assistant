@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student FAQ Assistant</title>
+    <style>
+        :root {
+            --bg: #f5f1e8;
+            --panel: #fffaf2;
+            --ink: #1f2937;
+            --muted: #6b7280;
+            --accent: #0f766e;
+            --accent-dark: #115e59;
+            --border: #d6d3d1;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            background:
+                radial-gradient(circle at top, rgba(15, 118, 110, 0.16), transparent 32%),
+                linear-gradient(180deg, #f9f6ef 0%, var(--bg) 100%);
+            color: var(--ink);
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            padding: 20px 28px;
+            background: rgba(255, 250, 242, 0.9);
+            border-bottom: 1px solid rgba(214, 211, 209, 0.9);
+            backdrop-filter: blur(8px);
+        }
+
+        nav a {
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .page {
+            width: min(1100px, calc(100% - 32px));
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: minmax(320px, 420px) minmax(320px, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            background: rgba(255, 250, 242, 0.95);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 20px 45px rgba(31, 41, 55, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 2.1rem;
+            line-height: 1.1;
+        }
+
+        p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 180px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            resize: vertical;
+            font: inherit;
+            background: #fff;
+        }
+
+        button {
+            margin-top: 14px;
+            border: 0;
+            border-radius: 999px;
+            padding: 13px 18px;
+            background: var(--accent);
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+        }
+
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #loading-spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid var(--accent);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .answer-shell {
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .answer-label {
+            margin: 0 0 12px;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        #answer-output {
+            white-space: pre-wrap;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .empty-state {
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        @media (max-width: 860px) {
+            .page {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Student Assistant</a>
+        <a href="https://aidemy-planner-53274683663.us-central1.run.app/">Planner</a>
+        <a href="https://aidemy-portal-53274683663.us-central1.run.app/">Home</a>
+        <a href="https://aidemy-portal-53274683663.us-central1.run.app/quiz">Quizzes</a>
+        <a href="https://aidemy-portal-53274683663.us-central1.run.app/courses">Courses</a>
+        <a href="https://aidemy-portal-53274683663.us-central1.run.app/assignment">Assignments</a>
+    </nav>
+
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
+
+    <main class="page">
+        <section class="card">
+            <h1>Ask the FAQ Agent</h1>
+            <p>Submit a course or study question and Gemini will respond with a grounded answer based on the current teaching plan when possible.</p>
+
+            <form id="faq-form">
+                <label for="question">Your question</label>
+                <textarea id="question" name="question" placeholder="Example: What topics should I revise before the next quiz?"></textarea>
+                <button type="submit">Ask Gemini</button>
+            </form>
+        </section>
+
+        <section class="card answer-shell">
+            <p class="answer-label">Assistant Response</p>
+            <div id="answer-output" class="empty-state">Your answer will appear here.</div>
+        </section>
+    </main>
+
+    <script>
+        const faqForm = document.getElementById('faq-form');
+        const questionInput = document.getElementById('question');
+        const answerOutput = document.getElementById('answer-output');
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        faqForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const question = questionInput.value.trim();
+            if (!question) {
+                alert('Please enter a question.');
+                return;
+            }
+
+            loadingOverlay.style.display = 'flex';
+            answerOutput.classList.remove('empty-state');
+            answerOutput.textContent = 'Thinking...';
+
+            try {
+                const response = await fetch('/ask_faq', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question })
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Request failed.');
+                }
+
+                answerOutput.textContent = data.answer;
+            } catch (error) {
+                console.error('FAQ error:', error);
+                answerOutput.textContent = error.message || 'An error occurred while getting the answer.';
+            } finally {
+                loadingOverlay.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

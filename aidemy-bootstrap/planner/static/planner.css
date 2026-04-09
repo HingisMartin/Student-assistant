@@ -1,0 +1,195 @@
+/* planner.css */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+nav {
+    background-color: #4285f4;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky; /* Makes the nav bar sticky */
+    top: 0; /* Stick it to the top */
+    width: 100%;
+    z-index: 1; /* Ensure it's above other content */
+  }
+
+  nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+  }
+  nav a:hover {
+      background-color: #3367d6;
+  }
+  
+  nav h1 {
+    margin: 0; /* Remove default h1 margin */
+    font-size: 1.5em;
+  }
+  
+  nav ul {
+    list-style: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Align list items horizontally */
+  }
+  
+  nav li {
+    margin-left: 20px;
+  }
+  
+
+/* Card styling for form and output */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card-container-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.card-container {
+    width: 70%; /* Adjust the width of the card container */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Form Styling */
+#planner-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#planner-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#planner-form select,
+#planner-form input[type="text"] {
+     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%; /* Make form fields wider */
+    box-sizing: border-box;
+}
+#planner-form select{
+    min-width: 200px;
+}
+
+#planner-form button {
+    background-color: #3498db; /* Google Blue */
+     color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#planner-form button:hover {
+    background-color: #2980b9;
+}
+#planner-form input[type="text"]{
+    min-height: 40px;
+}
+
+/* Loading Overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#loading-spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+ 
+/* Markdown Output Styling */
+#markdown-output {
+    max-width: 800px;
+    margin: 0 auto;
+}
+#markdown-output p,
+#markdown-output ul,
+#markdown-output ol,
+#markdown-output h1,
+#markdown-output h2,
+#markdown-output h3,
+#markdown-output h4,
+#markdown-output h5,
+#markdown-output h6{
+    margin: 10px 0;
+}
+
+#markdown-output ul,
+#markdown-output ol{
+    padding-left: 40px;
+}
+#markdown-output table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#markdown-output table, th, td {
+    border: 1px solid #ddd;
+}
+
+#markdown-output th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #planner-form {
+        max-width: 95%;
+    }
+    #markdown-output{
+        max-width: 95%;
+    }
+    #markdown-output ul,
+    #markdown-output ol{
+        padding-left: 20px;
+    }
+}
